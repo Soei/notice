@@ -1,0 +1,24 @@
+{
+  "name": "@soei/notice",
+  "version": "0.0.2",
+  "description": "提示框~",
+  "private": false,
+  "type": "module",
+  "main": "notice.cjs",
+  "module": "notice.js",
+  "author": "soei | alwbg@163.com",
+  "license": "ISC",
+  "files": [
+    "notice.cjs",
+    "notice.js",
+    "style.css"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@soei/util": "^1.1.2"
+  }
+}
