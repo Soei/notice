@@ -1,11 +1,11 @@
 import { resize as l, position as c, observer as a } from "@soei/util/position";
-import { withDirectives as d, openBlock as m, createElementBlock as u, normalizeStyle as f, createElementVNode as v, renderSlot as h, vShow as p } from "vue";
-const _ = (e, t) => {
+import { withDirectives as m, openBlock as d, createElementBlock as u, normalizeClass as f, normalizeStyle as h, createElementVNode as p, renderSlot as v, vShow as _ } from "vue";
+const b = (e, t) => {
   const o = e.__vccOpts || e;
-  for (const [i, s] of t)
-    o[i] = s;
+  for (const [n, s] of t)
+    o[n] = s;
   return o;
-}, b = {
+}, y = {
   name: "Notice",
   props: {
     visiable: {
@@ -23,6 +23,10 @@ const _ = (e, t) => {
     },
     bind: {
       type: Object
+    },
+    animate: {
+      type: Boolean,
+      default: !0
     }
   },
   data() {
@@ -32,7 +36,8 @@ const _ = (e, t) => {
       css: {
         left: 0,
         top: 0
-      }
+      },
+      mark: "emx-leave"
     };
   },
   mounted() {
@@ -48,39 +53,44 @@ const _ = (e, t) => {
     },
     leave(e) {
       clearTimeout(this.showmark), this.showmark = setTimeout(() => {
-        this.$emit("update:visiable", !1), this.$emit("update:bind", null);
+        this.$emit("update:visiable", !1);
       }, +e ? e : this.lazy);
+    },
+    appendEx(e) {
+      e.hasAttribute(this.mark) || (e.setAttribute(this.mark, ""), e.addEventListener("mouseleave", () => {
+        this.$emit("update:bind", null), this.leave();
+      }));
     }
   },
   watch: {
     bind(e, t) {
-      e && (clearTimeout(this.showmark), e.addEventListener("mouseleave", this.leave), a.observe(e), this.reDraw(e)), t && (t.removeEventListener("mouseleave", this.leave), a.unobserve(t));
+      e && (clearTimeout(this.showmark), this.appendEx(e), a.observe(e), this.reDraw(e)), t && a.unobserve(t);
     }
   }
 }, w = { class: "notice-content" };
-function y(e, t, o, i, s, r) {
-  return d((m(), u("div", {
+function k(e, t, o, n, s, i) {
+  return m((d(), u("div", {
     ref: "refNotice",
-    class: "notice",
-    style: f(s.css),
-    onMouseleave: t[0] || (t[0] = (n) => r.leave(100)),
-    onMouseenter: t[1] || (t[1] = (...n) => r.enter && r.enter(...n))
+    class: f(["notice", { "ex-animating": o.animate }]),
+    style: h(s.css),
+    onMouseleave: t[0] || (t[0] = (r) => i.leave(100)),
+    onMouseenter: t[1] || (t[1] = (...r) => i.enter && i.enter(...r))
   }, [
-    v("div", w, [
-      h(e.$slots, "default", {}, void 0, !0)
+    p("div", w, [
+      v(e.$slots, "default", {}, void 0, !0)
     ])
-  ], 36)), [
-    [p, o.visiable]
+  ], 38)), [
+    [_, o.visiable]
   ]);
 }
-const N = /* @__PURE__ */ _(b, [["render", y], ["__scopeId", "data-v-8cbbc4cd"]]), k = [N], $ = {
+const x = /* @__PURE__ */ b(y, [["render", k], ["__scopeId", "data-v-0712d224"]]), N = [x], S = {
   install(e) {
-    k.forEach((t) => {
+    N.forEach((t) => {
       e.component("s-" + t.name.toLowerCase(), t);
     });
   }
 };
 export {
-  N as Notice,
-  $ as default
+  x as Notice,
+  S as default
 };
