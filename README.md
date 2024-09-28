@@ -80,7 +80,7 @@ import { Notice } from "@soei/notice";
 
 ### _`bind`_ 目标对象
 
-### _`visiable`_ 是否显示
+### _`visible`_ 是否显示
 
 ### _`lazy`_ 延迟隐藏
 
@@ -90,13 +90,13 @@ import { Notice } from "@soei/notice";
   <span ref="notice"></span>
 </div>
 <!-- VUE3 -->
-<Notice v-model:bind="notice" v-model:visiable="visiable" :lazy="3000">
+<Notice v-model:bind="notice" v-model:visible="visible" :lazy="3000">
   提示内容~
 </Notice>
 ...
 <script setup>
   let notice = ref(null);
-  let visiable = ref(false);
+  let visible = ref(false);
   let refNotice = ref(null);
 
   /* 所在容器重新绘制位置 */
@@ -106,7 +106,7 @@ import { Notice } from "@soei/notice";
 </script>
 
 <!-- VUE2 -->
-<Notice :bind.sync="notice" :visiable.sync="visiable" :lazy="3000">
+<Notice :bind.sync="notice" :visible.sync="visible" :lazy="3000">
   提示内容~
 </Notice>
 ...
@@ -115,7 +115,7 @@ import { Notice } from "@soei/notice";
     data() {
         return {
             bind: this.$refs.notice,
-            visiable: false,
+            visible: false,
         }
     }
   // ...
