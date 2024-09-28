@@ -1,6 +1,6 @@
 import { picker as l } from "@soei/util";
-import { resize as c, position as m, observer as a } from "@soei/util/position";
-import { withDirectives as u, openBlock as d, createElementBlock as f, normalizeClass as h, normalizeStyle as v, withKeys as p, createElementVNode as b, renderSlot as y, vShow as k } from "vue";
+import { resize as c, position as u, observer as a } from "@soei/util/position";
+import { withDirectives as m, openBlock as d, createElementBlock as f, normalizeClass as h, normalizeStyle as v, withKeys as p, createElementVNode as y, renderSlot as k, vShow as b } from "vue";
 const _ = (e, t) => {
   const s = e.__vccOpts || e;
   for (const [r, o] of t)
@@ -28,6 +28,10 @@ const _ = (e, t) => {
     animate: {
       type: Boolean,
       default: !0
+    },
+    filter: {
+      type: Function,
+      default: (e) => e
     }
   },
   data() {
@@ -63,7 +67,7 @@ const _ = (e, t) => {
     },
     draw: c,
     reDraw(e) {
-      this.target = e, m(this);
+      this.target = e, u(this);
     },
     enter() {
       clearTimeout(this.showmark);
@@ -88,22 +92,22 @@ const _ = (e, t) => {
   }
 }, x = { class: "notice-content" };
 function E(e, t, s, r, o, i) {
-  return u((d(), f("div", {
+  return m((d(), f("div", {
     ref: "refNotice",
     class: h(["notice", { "ex-animating": s.animate }]),
-    style: v(o.css),
+    style: v(s.filter(o.css)),
     onMouseleave: t[0] || (t[0] = (n) => i.leave(300)),
     onMouseenter: t[1] || (t[1] = (...n) => i.enter && i.enter(...n)),
     onKeyup: t[2] || (t[2] = p((n) => i.leave(10), ["esc"]))
   }, [
-    b("div", x, [
-      y(e.$slots, "default", {}, void 0, !0)
+    y("div", x, [
+      k(e.$slots, "default", {}, void 0, !0)
     ])
   ], 38)), [
-    [k, s.visible]
+    [b, s.visible]
   ]);
 }
-const N = /* @__PURE__ */ _(w, [["render", E], ["__scopeId", "data-v-bb9f126f"]]), S = [N], B = {
+const N = /* @__PURE__ */ _(w, [["render", E], ["__scopeId", "data-v-74b7c05f"]]), S = [N], M = {
   install(e) {
     S.forEach((t) => {
       e.component("S" + t.name, t);
@@ -112,5 +116,5 @@ const N = /* @__PURE__ */ _(w, [["render", E], ["__scopeId", "data-v-bb9f126f"]]
 };
 export {
   N as Notice,
-  B as default
+  M as default
 };
