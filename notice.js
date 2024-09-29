@@ -1,10 +1,10 @@
 import { picker as l } from "@soei/util";
-import { resize as c, position as u, observer as a } from "@soei/util/position";
-import { withDirectives as m, openBlock as d, createElementBlock as f, normalizeClass as h, normalizeStyle as v, withKeys as p, createElementVNode as y, renderSlot as k, vShow as b } from "vue";
+import { resize as c, position as m, observer as a } from "@soei/util/position";
+import { withDirectives as u, openBlock as d, createElementBlock as f, normalizeClass as h, normalizeStyle as p, withKeys as v, createElementVNode as y, renderSlot as k, vShow as b } from "vue";
 const _ = (e, t) => {
   const s = e.__vccOpts || e;
-  for (const [r, o] of t)
-    s[r] = o;
+  for (const [i, o] of t)
+    s[i] = o;
   return s;
 }, w = {
   name: "Notice",
@@ -17,6 +17,10 @@ const _ = (e, t) => {
     lazy: {
       type: [Number, String],
       default: 1e3
+    },
+    start: {
+      type: [Number, String],
+      default: 800
     },
     position: {
       type: String,
@@ -36,6 +40,7 @@ const _ = (e, t) => {
   },
   data() {
     return {
+      show: !1,
       target: null,
       room: this.$refs.refNotice,
       css: {
@@ -67,7 +72,11 @@ const _ = (e, t) => {
     },
     draw: c,
     reDraw(e) {
-      this.target = e, u(this);
+      setTimeout(() => {
+        this.target = e;
+        let t = this.room.style, s = this.room.offsetHeight, i = t.display;
+        s || (t.display = "block"), m(this), s || (t.display = i);
+      }, +this.start);
     },
     enter() {
       clearTimeout(this.showmark);
@@ -84,6 +93,11 @@ const _ = (e, t) => {
     }
   },
   watch: {
+    visible(e) {
+      setTimeout(() => {
+        this.show = e;
+      }, +this.start);
+    },
     bind(e, t) {
       e && (clearTimeout(this.showmark), this.appendEx(e), a.observe(e), this.$nextTick(() => {
         this.reDraw(e);
@@ -91,23 +105,23 @@ const _ = (e, t) => {
     }
   }
 }, x = { class: "notice-content" };
-function E(e, t, s, r, o, i) {
-  return m((d(), f("div", {
+function E(e, t, s, i, o, r) {
+  return u((d(), f("div", {
     ref: "refNotice",
     class: h(["notice", { "ex-animating": s.animate }]),
-    style: v(s.filter(o.css)),
-    onMouseleave: t[0] || (t[0] = (n) => i.leave(300)),
-    onMouseenter: t[1] || (t[1] = (...n) => i.enter && i.enter(...n)),
-    onKeyup: t[2] || (t[2] = p((n) => i.leave(10), ["esc"]))
+    style: p(s.filter(o.css)),
+    onMouseleave: t[0] || (t[0] = (n) => r.leave(300)),
+    onMouseenter: t[1] || (t[1] = (...n) => r.enter && r.enter(...n)),
+    onKeyup: t[2] || (t[2] = v((n) => r.leave(10), ["esc"]))
   }, [
     y("div", x, [
       k(e.$slots, "default", {}, void 0, !0)
     ])
   ], 38)), [
-    [b, s.visible]
+    [b, o.show]
   ]);
 }
-const N = /* @__PURE__ */ _(w, [["render", E], ["__scopeId", "data-v-74b7c05f"]]), S = [N], M = {
+const N = /* @__PURE__ */ _(w, [["render", E], ["__scopeId", "data-v-7f5ec7f9"]]), S = [N], B = {
   install(e) {
     S.forEach((t) => {
       e.component("S" + t.name, t);
@@ -116,5 +130,5 @@ const N = /* @__PURE__ */ _(w, [["render", E], ["__scopeId", "data-v-74b7c05f"]]
 };
 export {
   N as Notice,
-  M as default
+  B as default
 };

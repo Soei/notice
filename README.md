@@ -3,6 +3,7 @@
 # 提示框 [![Latest Version on NPM](https://img.shields.io/npm/v/@soei/notice?label=npm&style=flat-square)](https://npmjs.com/package/@soei/notice) ![Software License](https://img.shields.io/badge/license-ISC-brightgreen?label=&style=flat-square) [![npm](https://img.shields.io/npm/dw/@soei/notice?label=Downloads&style=flat-square)](https://www.npmjs.com/package/@soei/notice) ![npm bundle size](https://img.shields.io/bundlephobia/min/%40soei%2Fnotice?label=Size&color=&style=flat-square)
 
 ![依赖](https://img.shields.io/badge/依赖-npm_i_@soei/util-ffc107?style=flat-square)[![Latest Version on NPM](https://img.shields.io/npm/v/@soei/util?label=&style=flat-square)](https://npmjs.com/package/@soei/util)
+
 ```html
 <template>
   <s-notice ...></s-notice>
@@ -31,6 +32,14 @@
 ```
 
 ## 更新日志
+
+### `0.0.7`
+
+- #### `start` 延迟显示
+
+```html
+<s-notice :start="300"></s-notice>
+```
 
 `Vue3` 引入方式
 
