@@ -1,6 +1,6 @@
 {
   "name": "@soei/notice",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "提示框~",
   "private": false,
   "type": "module",
@@ -19,6 +19,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@soei/util": "^1.1.2"
+    "@soei/util": "^1.1.5"
   }
 }
