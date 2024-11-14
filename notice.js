@@ -1,10 +1,10 @@
-import { picker as l } from "@soei/util";
-import { resize as u, position as m, observer as a } from "@soei/util/position";
-import { withDirectives as c, openBlock as d, createElementBlock as f, normalizeClass as h, normalizeStyle as p, withKeys as v, createElementVNode as y, renderSlot as k, vShow as b } from "vue";
+import { picker as h } from "@soei/util";
+import { resize as u, position as n, observer as a } from "@soei/util/position";
+import { withDirectives as f, openBlock as m, createElementBlock as c, normalizeClass as d, normalizeStyle as v, withKeys as p, createElementVNode as y, renderSlot as b, vShow as k } from "vue";
 const w = (e, t) => {
   const s = e.__vccOpts || e;
-  for (const [i, o] of t)
-    s[i] = o;
+  for (const [o, i] of t)
+    s[o] = i;
   return s;
 }, E = {
   name: "Notice",
@@ -59,7 +59,8 @@ const w = (e, t) => {
       M: {
         Escape: !0,
         27: !0
-      }
+      },
+      has: !1
     };
   },
   mounted() {
@@ -76,14 +77,13 @@ const w = (e, t) => {
       }
     },
     escfx(e) {
-      this.M[l(e, "key|code|keyCode=>k").k] && this.leave(10);
+      this.M[h(e, "key|code|keyCode=>k").k] && this.leave(10);
     },
     draw: u,
     reDraw(e) {
       setTimeout(() => {
-        this.target = e;
-        let t = this.room.style, s = this.room.offsetHeight, i = t.display;
-        s || (t.display = "block"), m(this), s || (t.display = i);
+        let t = this.room.style, s = this.room.offsetHeight, o = t.display;
+        e && e.offsetHeight ? (s || (t.display = "block"), n(this), s || (t.display = o)) : this.$visible(!1);
       }, +this.start);
     },
     enter() {
@@ -98,38 +98,41 @@ const w = (e, t) => {
       e.hasAttribute(this.mark) || (e.setAttribute(this.mark, ""), e.addEventListener("mouseleave", () => {
         this.mouseleave <= -1 || (this.$emit("update:bind", null), this.leave());
       }));
+    },
+    $visible(e) {
+      setTimeout(() => {
+        this.has = !/^0\w*$/.test(this.room.style.top), this.has || (n(this), this.has = !0), this.show = e;
+      }, +this.start);
     }
   },
   watch: {
     visible(e) {
-      setTimeout(() => {
-        this.show = e;
-      }, +this.start);
+      this.$visible(e);
     },
     bind(e, t) {
-      e && (clearTimeout(this.showmark), this.appendEx(e), this.resize && a.observe(e), this.$nextTick(() => {
+      this.target = e, this.$visible(e && e.offsetHeight), e && (clearTimeout(this.showmark), this.appendEx(e), this.resize && a.observe(e), this.$nextTick(() => {
         this.reDraw(e);
       })), t && a.unobserve(t);
     }
   }
 }, x = { class: "notice-content" };
-function N(e, t, s, i, o, r) {
-  return c((d(), f("div", {
+function N(e, t, s, o, i, r) {
+  return f((m(), c("div", {
     ref: "refNotice",
-    class: h(["notice", { "ex-animating": s.animate }]),
-    style: p(s.filter(o.css)),
-    onMouseleave: t[0] || (t[0] = (n) => r.leave(s.mouseleave)),
-    onMouseenter: t[1] || (t[1] = (...n) => r.enter && r.enter(...n)),
-    onKeyup: t[2] || (t[2] = v((n) => r.leave(10), ["esc"]))
+    class: d(["notice", { "ex-animating": i.has && s.animate }]),
+    style: v(s.filter(i.css)),
+    onMouseleave: t[0] || (t[0] = (l) => r.leave(s.mouseleave)),
+    onMouseenter: t[1] || (t[1] = (...l) => r.enter && r.enter(...l)),
+    onKeyup: t[2] || (t[2] = p((l) => r.leave(10), ["esc"]))
   }, [
     y("div", x, [
-      k(e.$slots, "default", {}, void 0, !0)
+      b(e.$slots, "default", {}, void 0, !0)
     ])
   ], 38)), [
-    [b, o.show]
+    [k, i.show]
   ]);
 }
-const S = /* @__PURE__ */ w(E, [["render", N], ["__scopeId", "data-v-496437c1"]]), z = [S], B = {
+const S = /* @__PURE__ */ w(E, [["render", N], ["__scopeId", "data-v-fa39d591"]]), z = [S], B = {
   install(e) {
     z.forEach((t) => {
       e.component("S" + t.name, t);
