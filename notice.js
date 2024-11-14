@@ -101,7 +101,7 @@ const w = (e, t) => {
     },
     $visible(e) {
       setTimeout(() => {
-        this.has = !/^0\w*$/.test(this.room.style.top), this.has || (n(this), this.has = !0), this.show = e;
+        this.has = !/^0\w*$/.test(this.room.style.top), this.has || (this.target && n(this), this.has = !0), this.show = e;
       }, +this.start);
     }
   },
@@ -110,7 +110,7 @@ const w = (e, t) => {
       this.$visible(e);
     },
     bind(e, t) {
-      this.target = e, this.$visible(e && e.offsetHeight), e && (clearTimeout(this.showmark), this.appendEx(e), this.resize && a.observe(e), this.$nextTick(() => {
+      e && (this.target = e), this.$visible(e && e.offsetHeight), e && (clearTimeout(this.showmark), this.appendEx(e), this.resize && a.observe(e), this.$nextTick(() => {
         this.reDraw(e);
       })), t && a.unobserve(t);
     }
@@ -132,7 +132,7 @@ function N(e, t, s, o, i, r) {
     [k, i.show]
   ]);
 }
-const S = /* @__PURE__ */ w(E, [["render", N], ["__scopeId", "data-v-fa39d591"]]), z = [S], B = {
+const S = /* @__PURE__ */ w(E, [["render", N], ["__scopeId", "data-v-ff1b6c93"]]), z = [S], B = {
   install(e) {
     z.forEach((t) => {
       e.component("S" + t.name, t);

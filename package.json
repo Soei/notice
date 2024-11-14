@@ -1,6 +1,6 @@
 {
   "name": "@soei/notice",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "提示框~",
   "private": false,
   "type": "module",
